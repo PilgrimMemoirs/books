@@ -1,13 +1,13 @@
 <section class="form">
-  <%= form_for @book do |f| %>
-    <%= f.label :title, "Book Title:  " %>
-    <%= f.text_field :title %>
+  <%= form_for @user do |f| %>
+    <%= f.label :first_name, "First Name:  " %>
+    <%= f.text_field :first_name %>
 
-    <%= f.label :author, "Book's Author:  " %>
-    <%= f.text_field :author %>
+    <%= f.label :last_name, "Last Name:  " %>
+    <%= f.text_field :last_name %>
 
-    <%= f.label :description, "Book Description:  " %>
-    <%= f.text_field :description %>
+    <%= f.label :username, "Username:  " %>
+    <%= f.text_field :username %>
 
     <%= f.submit "Create" %>
   <% end %>

@@ -33,6 +33,7 @@ class BooksController < ApplicationController
     @book.author = book_params[:author]
     @book.description = book_params[:description]
     if @book.save
+      flash[:success] = "Book updated successfully"
       redirect_to book_path(@book.id)
     end
   end
