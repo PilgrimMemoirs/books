@@ -18,7 +18,6 @@ class BooksController < ApplicationController
     if @book.id != nil
       flash[:success] = "Book added successfully"
       flash[:hello] = "Oh hey there!"
-      flash.notice = "Lets see if this works!"
       redirect_to books_path
     else
       flash.now[:failure] = "Book did not save, try again"
