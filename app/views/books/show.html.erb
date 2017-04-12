@@ -1,0 +1,14 @@
+<section>
+  <h2> <%= @book.title %> </h2>
+  <h4> <%= @book.author %> </h4>
+  <p> <%= @book.description %> </p>
+</section>
+
+<hr>
+
+<section>
+  <h3> Users who own this book </h3>
+  <% @book.users.each do |user| %>
+    <h4><%= link_to user.username, user_path(user.id) %></h4>
+  <% end %>
+<section>

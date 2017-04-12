@@ -1,0 +1,7 @@
+<h1> All the Books! </h1>
+
+<section id="books">
+  <% @books.each do |book| %>
+    <h3><%= link_to book.title, book_path(book.id) %></h3>
+  <% end %>
+</section>
