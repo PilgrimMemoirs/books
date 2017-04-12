@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :users
   resources :books
 
+  post 'books/:id/buy', to: 'books#buy', as: 'buy'
+
   get 'login', to: 'sessions#new'
 
   post 'login', to: 'sessions#create'

@@ -44,6 +44,16 @@ class BooksController < ApplicationController
   end
 
 
+   def buy
+     user_book = UserBook.create(user_id: session[:user_id], book_id: params[:id])
+
+     if user_book
+       flash[:success] = "Book Bought!"
+       redirect_to user_path(session[:user_id])
+     end
+   end
+
+
 
   private
 

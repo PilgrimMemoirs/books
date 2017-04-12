@@ -2,6 +2,9 @@
   <h2> <%= @book.title %> </h2>
   <h4> <%= @book.author %> </h4>
   <p> <%= @book.description %> </p>
+   <% if session[:user_id] %>
+    <%= link_to "Buy Book", buy_path(@book.id), method: :post %>
+  <% end %>
 </section>
 
 <!-- Add link to own book if user logged in -->
