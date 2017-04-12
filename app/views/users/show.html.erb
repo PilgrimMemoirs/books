@@ -1,0 +1,15 @@
+<section>
+  <h2> <%= @user.first_name %>  <%= @user.last_name %> </h2>
+  <h4> <%= @user.username %> </h4>
+</section>
+
+<!-- Add link to own book if user logged in -->
+
+<hr>
+
+<section>
+  <h3> Books User Owns </h3>
+  <% @user.books.each do |book| %>
+    <h4><%= link_to book.title, book_path(book.id) %></h4>
+  <% end %>
+<section>

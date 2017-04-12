@@ -1,14 +1,1 @@
-<section class="form">
-  <%= form_for @book do |f| %>
-    <%= f.label :title, "Book Title:  " %>
-    <%= f.text_field :title %>
-
-    <%= f.label :author, "Book's Author:  " %>
-    <%= f.text_field :author %>
-
-    <%= f.label :description, "Book Description:  " %>
-    <%= f.text_field :description %>
-
-    <%= f.submit "Create" %>
-  <% end %>
-</section>
+<%= render partial: "form", locals: {action_name: "Create"} %>

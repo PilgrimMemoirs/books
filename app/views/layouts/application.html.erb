@@ -9,6 +9,12 @@
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <li><%= link_to "New User", new_user_path %></li>
+        <li><%= link_to "Add a Book", new_book_path %></li>
+      </ul>
+    </nav>
     <section class="flash">
       <% flash.each do |name, message| %>
         <div class="<%= name %>"><%= message %></div>
