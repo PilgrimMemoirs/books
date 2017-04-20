@@ -1,20 +1,24 @@
 class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @books = Book.all
-  end
-
   # def index
-  #   if params[:genre_id]
-  #     # we are in the nested route
-  #     # retrieve books based on the genre
-  #     @books = Book.includes(:genres).where(genres: { id: 1})
-  #   else
-  #     # we are in our 'regular' route
-  #     @books = Book.all
-  #   end
+  #   @books = Book.all
   # end
+
+  def index
+    if params[:genre_id]
+      # localhost:3000/genres/2/books
+
+      # we are in the nested route
+      # retrieve books based on the genre
+      #@books = Book.includes(:genres).where(genres: { id: params[:genre_id]})
+      @books = Genre.find(params[:genre_id]).books
+    else
+      #localhost:3000/books
+      # we are in our 'regular' route
+      @books = Book.all
+    end
+  end
 
   def show; end
 
