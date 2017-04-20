@@ -1,12 +1,22 @@
 class BooksController < ApplicationController
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
     @books = Book.all
   end
 
-  def show
-    @book = Book.find(params[:id])
-  end
+  # def index
+  #   if params[:genre_id]
+  #     # we are in the nested route
+  #     # retrieve books based on the genre
+  #     @books = Book.includes(:genres).where(genres: { id: 1})
+  #   else
+  #     # we are in our 'regular' route
+  #     @books = Book.all
+  #   end
+  # end
+
+  def show; end
 
   def new
     @book = Book.new
@@ -25,23 +35,18 @@ class BooksController < ApplicationController
     end
   end
 
-  def edit
-    @book = Book.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @book = Book.find(params[:id])
     @book.title = book_params[:title]
     @book.author = book_params[:author]
     @book.description = book_params[:description]
-    if @book.save
+    if book.save
       redirect_to book_path(@book.id)
     end
   end
 
-  def destroy
-    @book = Book.find(params[:id])
-  end
+  def destroy; end
 
 
    def buy
@@ -59,6 +64,10 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :author, :description)
+  end
+
+  def find_book
+    @book = Book.find_by_id(params[:id])
   end
 
 end
