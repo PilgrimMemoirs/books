@@ -1,12 +1,26 @@
 class BooksController < ApplicationController
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
+
+  # def index
+  #   @books = Book.all
+  # end
 
   def index
-    @books = Book.all
+    if params[:genre_id]
+      # localhost:3000/genres/2/books
+
+      # we are in the nested route
+      # retrieve books based on the genre
+      #@books = Book.includes(:genres).where(genres: { id: params[:genre_id]})
+      @books = Genre.find(params[:genre_id]).books
+    else
+      #localhost:3000/books
+      # we are in our 'regular' route
+      @books = Book.all
+    end
   end
 
-  def show
-    @book = Book.find(params[:id])
-  end
+  def show; end
 
   def new
     @book = Book.new
@@ -17,29 +31,36 @@ class BooksController < ApplicationController
 
     if @book.id != nil
       flash[:success] = "Book added successfully"
+      flash[:hello] = "Oh hey there!"
       redirect_to books_path
     else
+      flash.now[:failure] = "Book did not save, try again"
       render :new
     end
   end
 
-  def edit
-    @book = Book.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @book = Book.find(params[:id])
     @book.title = book_params[:title]
     @book.author = book_params[:author]
     @book.description = book_params[:description]
-    if @book.save
+    if book.save
       redirect_to book_path(@book.id)
     end
   end
 
-  def destroy
-    @book = Book.find(params[:id])
-  end
+  def destroy; end
+
+
+   def buy
+     user_book = UserBook.create(user_id: session[:user_id], book_id: params[:id])
+
+     if user_book
+       flash[:success] = "Book Bought!"
+       redirect_to user_path(session[:user_id])
+     end
+   end
 
 
 
@@ -47,6 +68,10 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :author, :description)
+  end
+
+  def find_book
+    @book = Book.find_by_id(params[:id])
   end
 
 end
