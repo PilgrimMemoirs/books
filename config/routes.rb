@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :users
   resources :books
 
-  get '/auth/:provider/callback', to: 'users#auth_callback'
+  get '/auth/:provider/callback', to: 'users#auth_callback', as: 'auth_callback'
 end
