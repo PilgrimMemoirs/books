@@ -6,7 +6,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.find_by(id: params[:id])
+    if @book.nil?
+      head :not_found
+    end
   end
 
   def new
